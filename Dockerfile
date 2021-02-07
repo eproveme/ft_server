@@ -27,7 +27,7 @@ RUN openssl req -x509 -nodes -days 365 \
 	-subj "/C=RU/ST=Moscow/L=Moscow/O=21school/OU=eproveme/CN=localhost/emailAddress=eproveme@student.21-school.ru" \
 	-newkey rsa:2048 \
 	-keyout /etc/ssl/nginx-selfsigned.key \
-	-out /etc/ssl/certs/nginx-selfsigned.crt && openssl dhparam -out /etc/ssl/certs/dhparam.pem 512
+	-out /etc/ssl/certs/nginx-selfsigned.crt
 
 COPY ./srcs/nginx.conf /etc/nginx/sites-enabled/
 COPY ./srcs/wp-config.php /usr/share/wordpress/wp-config.php
@@ -39,8 +39,8 @@ RUN chmod -R 600 /etc/ssl/*
 RUN chown -R www-data /var/www/*
 RUN chmod -R 755 /var/www/*
 
-COPY ./srcs/launch.sh /usr/local/bin
 COPY ./srcs/autoindex.sh /usr/local/bin
+COPY ./srcs/launch.sh /usr/local/bin
 
 EXPOSE 80 443
 
